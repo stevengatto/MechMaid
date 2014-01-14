@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressableContentFrame">
+        <attr name="content_container_id" format="reference"/>
+        <attr name="progress_container_id" format="reference"/>
+        <attr name="defualt_progress_text" format="string"/>
+    </declare-styleable>
+</resources>
