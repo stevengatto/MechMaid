@@ -3,4 +3,7 @@
           package="com.overthink.mechmaid"
           android:versionCode="1"
           android:versionName="1.0">
+    <application>
+        <activity android:name=".auth.AuthenticationActivity"/>
+    </application>
 </manifest>
