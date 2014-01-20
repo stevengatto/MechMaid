@@ -64,6 +64,7 @@ public class ProgressableContentFrameManager {
             // If we find a ProgressableContentFrame, add it to the set
             if (child instanceof ProgressableContentFrame) {
                 progressableContentFrames.put(((ProgressableContentFrame) child).getId(), (ProgressableContentFrame) child);
+                registerProgressableContentFramesIn((ViewGroup) child);
             }
             // If we find a ViewGroup, recursively call this method on it
             else if (child instanceof ViewGroup) {
