@@ -22,6 +22,7 @@ public class TimeUtils {
     public static final String FORMAT_RSV_DATE_AND_TIME = "EEEE, MMMM d @ h:mm a";
     public static final String FORMAT_RSV_DATE = "EEEE, MMMM d";
     public static final String FORMAT_TIME_SHORT = "h:mm a";
+    public static final String FORMAT_URL_TIME = "MMddyyyy";
 
     //Fields
     /**Minutes elapsed in current day**/
