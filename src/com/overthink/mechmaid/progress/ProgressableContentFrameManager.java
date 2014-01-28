@@ -55,7 +55,7 @@ public class ProgressableContentFrameManager {
     public void registerProgressableContentFramesIn(ViewGroup viewTree) {
         // If the root of the view tree is a progressable content frame, add it to the set
         if (viewTree instanceof ProgressableContentFrame) {
-            progressableContentFrames.put(((ProgressableContentFrame) viewTree).getId(), (ProgressableContentFrame) viewTree);
+            progressableContentFrames.put(viewTree.getId(), (ProgressableContentFrame) viewTree);
         }
 
         // Iterate through children of this view group
@@ -63,7 +63,9 @@ public class ProgressableContentFrameManager {
             View child = viewTree.getChildAt(i);
             // If we find a ProgressableContentFrame, add it to the set
             if (child instanceof ProgressableContentFrame) {
-                progressableContentFrames.put(((ProgressableContentFrame) child).getId(), (ProgressableContentFrame) child);
+                progressableContentFrames.put(child.getId(), (ProgressableContentFrame) child);
+                // Continue searching within this content frame
+                registerProgressableContentFramesIn((ViewGroup) child);
             }
             // If we find a ViewGroup, recursively call this method on it
             else if (child instanceof ViewGroup) {
@@ -82,10 +84,12 @@ public class ProgressableContentFrameManager {
         ProgressableContentFrame progressableContentFrame = progressableContentFrames.get(progressableContentFrameId);
 
         // Show the progress container
-        progressableContentFrame.findViewById(progressableContentFrame.getProgressContainerId()).setVisibility(View.VISIBLE);
+        progressableContentFrame.findViewById(progressableContentFrame.getProgressContainerId())
+                .setVisibility(View.VISIBLE);
 
         // Hide the content
-        progressableContentFrame.findViewById(progressableContentFrame.getContentContainerId()).setVisibility(View.GONE);
+        progressableContentFrame.findViewById(progressableContentFrame.getContentContainerId())
+                .setVisibility(View.INVISIBLE);
     }
 
     /**

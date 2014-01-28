@@ -20,6 +20,14 @@ public class ConversionUtils {
                 Resources.getSystem().getDisplayMetrics());
     }
 
+    /*
+     * ConversionUtils value from pixels to density-independent pixels
+     */
+    public static int pxToDp(int px)
+    {
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+    }
+
     /**
      * Converts value from scaled pixels to pixels
      */
