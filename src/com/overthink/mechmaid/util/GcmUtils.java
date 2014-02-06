@@ -14,9 +14,9 @@ import java.io.IOException;
  * Helper methods and fields for interacting with Google Cloud Messaging. To use this helper class, you must extend it
  * and add a single field containing your project number
  */
-public abstract class GCMUtils {
+public abstract class GcmUtils {
 
-    public static final String TAG = GCMUtils.class.getName();
+    public static final String TAG = GcmUtils.class.getName();
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
     public static final String PROPERTY_APP_VERSION = "appVersion";
@@ -81,7 +81,7 @@ public abstract class GCMUtils {
      * @return A {@link android.content.SharedPreferences} file for GCM for this application
      */
     private SharedPreferences getGCMPreferences (Context context) {
-        return context.getSharedPreferences(GCMUtils.class.getSimpleName(), Context.MODE_PRIVATE);
+        return context.getSharedPreferences(GcmUtils.class.getSimpleName(), Context.MODE_PRIVATE);
     }
 
     /**
@@ -111,6 +111,7 @@ public abstract class GCMUtils {
             protected String doInBackground(Void... params) {
                 String msg = "";
                 try {
+                    // Get the singleton GCM instance for accessing the GCM server
                     GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
 
                     String regid = gcm.register(getSenderId());
@@ -120,17 +121,13 @@ public abstract class GCMUtils {
                     // so it can use GCM/HTTP or CCS to send messages to your app.
                     // The request to your server should be authenticated if your app
                     // is using accounts.
-                    GCMUtils.this.sendRegistrationIdToBackend();
+                    GcmUtils.this.sendRegistrationIdToBackend();
 
-                    // For this demo: we don't need to send it because the device
-                    // will send upstream messages to a server that echo back the
-                    // message using the 'from' address in the message.
-
-                    // Persist the regID - no need to register again.
-                    GCMUtils.this.storeRegistrationId(context, regid);
+                    // Persist the registration ID - no need to register again.
+                    GcmUtils.this.storeRegistrationId(context, regid);
                 } catch (IOException ex) {
                     msg = "Error :" + ex.getMessage();
-                    // If there is an error, don't just keep trying to register.
+                    // TODO: If there is an error, don't just keep trying to register.
                     // Require the user to click a button again, or perform
                     // exponential back-off.
                 }
