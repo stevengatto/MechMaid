@@ -84,10 +84,12 @@ public class ProgressableContentFrameManager {
         ProgressableContentFrame progressableContentFrame = progressableContentFrames.get(progressableContentFrameId);
 
         // Show the progress container
-        progressableContentFrame.findViewById(progressableContentFrame.getProgressContainerId()).setVisibility(View.VISIBLE);
+        progressableContentFrame.findViewById(progressableContentFrame.getProgressContainerId())
+                .setVisibility(View.VISIBLE);
 
         // Hide the content
-        progressableContentFrame.findViewById(progressableContentFrame.getContentContainerId()).setVisibility(View.GONE);
+        progressableContentFrame.findViewById(progressableContentFrame.getContentContainerId())
+                .setVisibility(View.INVISIBLE);
     }
 
     /**

@@ -35,13 +35,17 @@ public class WebServiceUtils {
      * @return the response from the server
      */
     public static WebServiceResponse makeHttpPostRequestWith(String url, String requestBody) {
-
         // HTTP response code (e.g., 200, 401, 404, etc)
         int responseCode;
         // Result of web service call (response data, response code, and exception if any)
         WebServiceResponse response = new WebServiceResponse();
         // URL connection to web service and response code
         HttpURLConnection connection = null;
+
+        // Log request
+        Log.i(TAG, "Making HTTP POST request with URL: " + url);
+        // Log request body
+        Log.i(TAG, "Request body: " + requestBody);
 
         try {
             // Create a URL from the supplied string
@@ -99,6 +103,12 @@ public class WebServiceUtils {
             response.setException(e);
         }
         finally {
+            // Log HTTP response code
+            Log.i(TAG, "Web service response code: " + response.getHttpResponseCode());
+
+            // Log response body
+            Log.i(TAG, "Web service response: " + response.getRawResponseBody());
+
             // Always close connection on completion
             if (connection != null) {
                 connection.disconnect();
@@ -115,12 +125,14 @@ public class WebServiceUtils {
      * @return the response from the server
      */
     public static WebServiceResponse makeHttpGetRequestWith(String url) {
-
         int responseCode;
         // Result of web service call (response data, response code, and exception if any)
         WebServiceResponse response = new WebServiceResponse();
         // URL connection to web service and response code
         HttpURLConnection connection = null;
+
+        // Log request
+        Log.i(TAG, "Making HTTP GET request with URL: " + url);
 
         try {
             // Create a URL from the supplied string
@@ -170,6 +182,12 @@ public class WebServiceUtils {
             response.setException(e);
         }
         finally {
+            // Log HTTP response code
+            Log.i(TAG, "Web service response code: " + response.getHttpResponseCode());
+
+            // Log response body
+            Log.i(TAG, "Web service response: " + response.getRawResponseBody());
+
             // Always close connection on completion
             if (connection != null) {
                 connection.disconnect();

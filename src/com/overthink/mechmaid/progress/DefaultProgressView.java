@@ -20,8 +20,10 @@ public class DefaultProgressView extends LinearLayout {
     public DefaultProgressView(Context context) {
         super(context);
 
-        // Inflate this content frame from XML
-        ((Activity) context).getLayoutInflater().inflate(R.layout.default_progress_view, this, true);
+        if (!isInEditMode()) {
+            // Inflate this content frame from XML
+            ((Activity) context).getLayoutInflater().inflate(R.layout.default_progress_view, this, true);
+        }
     }
 
     /**
@@ -37,10 +39,12 @@ public class DefaultProgressView extends LinearLayout {
     public DefaultProgressView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
 
-        // Inflate this content frame from XML
-        ((Activity) context).getLayoutInflater().inflate(R.layout.default_progress_view, this, true);
+        if (!isInEditMode()) {
+            // Inflate this content frame from XML
+            ((Activity) context).getLayoutInflater().inflate(R.layout.default_progress_view, this, true);
 
-        TypedArray attrValues =
-                context.getTheme().obtainStyledAttributes(attrs, R.styleable.ProgressableContentFrame, defStyle, 0);
+            TypedArray attrValues =
+                    context.getTheme().obtainStyledAttributes(attrs, R.styleable.ProgressableContentFrame, defStyle, 0);
+        }
     }
 }

@@ -41,15 +41,14 @@ public class ProgressableContentFrame extends FrameLayout {
     public ProgressableContentFrame(Context context, int contentContainerId, int progressContainerId) {
         super(context);
 
-        // Inflate this content frame from XML
-        ((Activity) context).getLayoutInflater().inflate(R.layout.progressable_content_frame, this, true);
+        if(!isInEditMode()) {
+            // Inflate this content frame from XML
+            ((Activity) context).getLayoutInflater().inflate(R.layout.progressable_content_frame, this, true);
 
-        // Save container IDs
-        this.contentContainerId = contentContainerId;
-        this.progressContainerId = progressContainerId;
-
-//        addDefaultContainersIfNeeded(context);
-//        showProgress();
+            // Save container IDs
+            this.contentContainerId = contentContainerId;
+            this.progressContainerId = progressContainerId;
+        }
     }
 
     /**
@@ -71,25 +70,24 @@ public class ProgressableContentFrame extends FrameLayout {
     public ProgressableContentFrame(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs);
 
-        // Inflate this content frame from XML
-        ((Activity) context).getLayoutInflater().inflate(R.layout.progressable_content_frame, this, true);
+        if (!isInEditMode()) {
+            // Inflate this content frame from XML
+            ((Activity) context).getLayoutInflater().inflate(R.layout.progressable_content_frame, this, true);
 
-        // Get the dereferenced attributes from XML
-        TypedArray attrValues =
-                context.getTheme().obtainStyledAttributes(attrs, R.styleable.ProgressableContentFrame, defStyle, 0);
+            // Get the dereferenced attributes from XML
+            TypedArray attrValues =
+                    context.getTheme().obtainStyledAttributes(attrs, R.styleable.ProgressableContentFrame, defStyle, 0);
 
-        // Save atrributes
-        contentContainerId =
-                attrValues.getResourceId(R.styleable.ProgressableContentFrame_content_container_id, DEFAULT_CONTAINER_ID);
-        progressContainerId = attrValues.getResourceId(R.styleable.ProgressableContentFrame_progress_container_id,
-                R.id.default_progress_container);
+            // Save atrributes
+            contentContainerId =
+                    attrValues.getResourceId(R.styleable.ProgressableContentFrame_content_container_id, DEFAULT_CONTAINER_ID);
+            progressContainerId = attrValues.getResourceId(R.styleable.ProgressableContentFrame_progress_container_id,
+                    R.id.default_progress_container);
 
-        if (attrValues.hasValue(R.styleable.ProgressableContentFrame_defualt_progress_text)) {
-            setProgressText(attrValues.getString(R.styleable.ProgressableContentFrame_defualt_progress_text));
+            if (attrValues.hasValue(R.styleable.ProgressableContentFrame_defualt_progress_text)) {
+                setProgressText(attrValues.getString(R.styleable.ProgressableContentFrame_defualt_progress_text));
+            }
         }
-
-//        addDefaultContainersIfNeeded(context);
-//        showProgress();
     }
 
     public int getContentContainerId() {
